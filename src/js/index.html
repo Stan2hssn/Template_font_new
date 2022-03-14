@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<script src="three.js"></script>
+<script src="GLTFLoader.js"></script>
+<script>
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xdddddd);
+
+
+    //tu place ta caméra ( ça varie en fonction de ton modèle)
+    camera = new THREE.PerspectiveCamera(40,window.innerWidth/window.innerHeight,1,5000);
+    /*camera.rotation.y = 45/180*Math.PI;
+    camera.position.x = 30;
+    camera.position.y = -30;
+    camera.position.z = 8;*/
+
+    renderer = new THREE.WebGLRenderer({antialias:true});
+    renderer.setSize((window.innerWidth / 2),(window.innerHeight / 2));
+    document.body.appendChild(renderer.domElement);
+
+
+    //ensuite tu as tes lights
+
+    hlight = new THREE.AmbientLight (0x404040,100);
+    scene.add(hlight);
+
+
+    directionalLight = new THREE.DirectionalLight(0xffffff,100);
+    directionalLight.position.set(0,1,0);
+    directionalLight.castShadow = true;
+    scene.add(directionalLight);
+
+    const geometry = new THREE.BoxGeometry();
+    const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+    const cube = new THREE.Mesh( geometry, material );
+    scene.add( cube );
+
+    //Tu load ton modèle ici
+
+    /*let loader = new THREE.GLTFLoader();
+    loader.load('gyroscope.glb', function(gltf){
+        car = gltf.scene.children[0];
+        car.scale.set(0.5,0.5,0.5);
+        scene.add(gltf.scene);
+        animate();
+    });*/
+/*
+
+    //tu fais tourner ton super modèle qui tue et pis voilà ^^
+    function animate() {
+        car.rotation.z += 0.01;
+        renderer.render(scene,camera);
+        requestAnimationFrame(animate);
+    }
+*/
+
+
+</script>
+</body>
+</html>
